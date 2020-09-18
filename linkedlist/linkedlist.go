@@ -134,15 +134,42 @@ func (ll *linkedlist) remove(index int) {
 	}
 }
 
+func (ll *linkedlist) reverse() {
+	if !ll.isEmpty() && ll.length > 1 {
+		if ll.length == 2 {
+			ll.tail = ll.head
+			ll.head = ll.tail.next
+			ll.head.next = ll.tail
+			ll.tail.next = nil
+			return
+		}
+
+		holder := ll.head
+		ll.head = ll.tail
+		ll.tail = holder
+
+		follower := ll.tail
+		curr := follower.next
+
+		for curr != nil {
+			leader := curr.next
+			curr.next = follower
+			follower = curr
+			curr = leader
+		}
+
+		ll.tail.next = nil
+	}
+}
+
 func main() {
 	ll := linkedlist{}
+	ll.initialize(1)
+	ll.append(2)
+	ll.append(3)
+	ll.append(4)
+	ll.append(5)
 	ll.print()
-	ll.initialize(5)
-	ll.print()
-	ll.append(16)
-	ll.print()
-	ll.prepend(10)
-	ll.print()
-	ll.remove(-1)
+	ll.reverse()
 	ll.print()
 }

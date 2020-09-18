@@ -123,13 +123,41 @@ class LinkedList {
 
     return this;
   };
+
+  reverse = () => {
+    if (!this.isEmpty() && this.length > 1) {
+      if (this.length === 2) {
+        this.tail = this.head;
+        this.head = this.tail.next;
+        this.head.next = this.tail;
+        this.tail.next = null;
+        return;
+      }
+
+      const holder = this.head;
+      this.head = this.tail;
+      this.tail = holder;
+
+      let follower = this.tail;
+      let curr = follower.next;
+
+      while (curr !== null) {
+        const leader = curr.next;
+        curr.next = follower;
+        follower = curr;
+        curr = leader;
+      }
+
+      this.tail.next = null;
+    }
+  };
 }
 
-const ll = new LinkedList(5);
+const ll = new LinkedList(1);
+ll.append(2);
+ll.append(3);
+ll.append(4);
+ll.append(5);
 ll.print();
-ll.append(15);
-ll.print();
-ll.prepend(11);
-ll.print();
-ll.remove(-1);
+ll.reverse();
 ll.print();
