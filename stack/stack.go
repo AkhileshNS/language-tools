@@ -1,6 +1,6 @@
 /*
  ** Stack
- ** New - new Stack(value)
+ ** New - newStack(value)
  ** Push - .push(value)
  ** Pop - .pop()
  ** Peek - .peek()
